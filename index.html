@@ -6,415 +6,186 @@
 <title>Zo Min Mogelijk — designpreview</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
-<style>
-  :root {
-    --bg: #f7f4ef;
-    --ink: #1a1f1c;
-    --muted: #5c655e;
-    --line: #d9d2c6;
-    --card: #ffffff;
-    --accent: #0f5c4c;
-    --accent-soft: #e4f0ec;
-    --warn: #8a4b12;
-    --warn-bg: #f8efe4;
-    --danger-soft: #f3e8e4;
-    --radius: 16px;
-    --shadow: 0 12px 40px rgba(26, 31, 28, 0.08);
-  }
-  * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    font-family: "IBM Plex Sans", system-ui, sans-serif;
-    color: var(--ink);
-    background: var(--bg);
-    line-height: 1.55;
-  }
-  a { color: inherit; }
-  .wrap { width: min(1080px, calc(100% - 2rem)); margin: 0 auto; }
-  .banner {
-    background: #2b2f2c;
-    color: #f0ebe3;
-    font-size: 0.85rem;
-    text-align: center;
-    padding: 0.55rem 1rem;
-  }
-  .banner strong { color: #c8e6db; }
-  header.nav {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 1.1rem 0; gap: 1rem;
-  }
-  .logo {
-    font-family: Fraunces, Georgia, serif;
-    font-weight: 600; font-size: 1.15rem; text-decoration: none;
-  }
-  .logo span { color: var(--accent); }
-  nav { display: flex; gap: 1.25rem; align-items: center; flex-wrap: wrap; }
-  nav a { text-decoration: none; color: var(--muted); font-size: 0.95rem; }
-  nav a:hover { color: var(--ink); }
-  .btn {
-    display: inline-flex; align-items: center; justify-content: center;
-    gap: 0.4rem; border-radius: 999px; padding: 0.75rem 1.25rem;
-    font-weight: 600; text-decoration: none; border: none; cursor: pointer;
-    font-size: 0.95rem;
-  }
-  .btn-primary { background: var(--accent); color: #fff; }
-  .btn-primary:hover { filter: brightness(1.05); }
-  .btn-ghost { background: transparent; border: 1px solid var(--line); color: var(--ink); }
-  .btn-soft { background: var(--accent-soft); color: var(--accent); }
-
-  /* HERO */
-  .hero {
-    display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 2rem;
-    padding: 1.5rem 0 2.5rem; align-items: start;
-  }
-  @media (max-width: 860px) {
-    .hero { grid-template-columns: 1fr; }
-    nav .hide-sm { display: none; }
-  }
-  .eyebrow {
-    display: inline-flex; align-items: center; gap: 0.4rem;
-    background: var(--accent-soft); color: var(--accent);
-    font-size: 0.8rem; font-weight: 600; padding: 0.35rem 0.7rem;
-    border-radius: 999px; margin-bottom: 1rem;
-  }
-  h1 {
-    font-family: Fraunces, Georgia, serif;
-    font-size: clamp(1.9rem, 4vw, 2.75rem);
-    line-height: 1.15; margin: 0 0 1rem; font-weight: 600;
-  }
-  .lede { font-size: 1.1rem; color: var(--muted); max-width: 36rem; margin: 0 0 1.25rem; }
-  .cta-row { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; margin-bottom: 0.75rem; }
-  .meta { font-size: 0.9rem; color: var(--muted); }
-  .meta strong { color: var(--ink); font-weight: 600; }
-
-  .card {
-    background: var(--card); border: 1px solid var(--line);
-    border-radius: var(--radius); box-shadow: var(--shadow);
-  }
-  .calc {
-    padding: 1.25rem 1.35rem;
-  }
-  .calc-label {
-    font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase;
-    color: var(--muted); font-weight: 600; margin-bottom: 0.75rem;
-  }
-  .calc-row {
-    display: flex; justify-content: space-between; align-items: baseline;
-    padding: 0.65rem 0; border-bottom: 1px solid var(--line);
-  }
-  .calc-row:last-of-type { border-bottom: none; }
-  .calc-row .k { color: var(--muted); font-size: 0.95rem; }
-  .calc-row .v { font-family: Fraunces, Georgia, serif; font-size: 1.35rem; font-weight: 600; }
-  .calc-row.tekort {
-    background: var(--warn-bg); margin: 0.75rem -0.5rem 0;
-    padding: 0.85rem 1rem; border-radius: 12px; border: none;
-  }
-  .calc-row.tekort .v { color: var(--warn); }
-  .calc-note { font-size: 0.8rem; color: var(--muted); margin-top: 0.9rem; }
-
-  section { padding: 2.75rem 0; }
-  section h2 {
-    font-family: Fraunces, Georgia, serif;
-    font-size: clamp(1.5rem, 3vw, 2rem); margin: 0 0 0.5rem;
-  }
-  .section-intro { color: var(--muted); max-width: 40rem; margin: 0 0 1.75rem; }
-
-  .steps {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
-  }
-  @media (max-width: 800px) { .steps { grid-template-columns: 1fr; } }
-  .step {
-    padding: 1.25rem; background: var(--card); border: 1px solid var(--line);
-    border-radius: var(--radius); position: relative;
-  }
-  .step .n {
-    width: 2rem; height: 2rem; border-radius: 50%;
-    background: var(--accent-soft); color: var(--accent);
-    display: grid; place-items: center; font-weight: 600; font-size: 0.9rem;
-    margin-bottom: 0.85rem;
-  }
-  .step h3 { margin: 0 0 0.4rem; font-size: 1.05rem; }
-  .step p { margin: 0; color: var(--muted); font-size: 0.95rem; }
-  .step .tag {
-    display: inline-block; margin-top: 0.85rem;
-    font-size: 0.75rem; font-weight: 600; color: var(--accent);
-    background: var(--accent-soft); padding: 0.25rem 0.55rem; border-radius: 999px;
-  }
-  .step.paid .tag { background: var(--warn-bg); color: var(--warn); }
-
-  .pricing {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;
-  }
-  @media (max-width: 800px) { .pricing { grid-template-columns: 1fr; } }
-  .price {
-    padding: 1.5rem; border-radius: var(--radius);
-    border: 1px solid var(--line); background: var(--card);
-  }
-  .price.featured {
-    border-color: var(--accent); box-shadow: var(--shadow);
-    position: relative;
-  }
-  .price .badge {
-    position: absolute; top: -0.7rem; right: 1rem;
-    background: var(--accent); color: #fff; font-size: 0.75rem;
-    font-weight: 600; padding: 0.3rem 0.65rem; border-radius: 999px;
-  }
-  .price h3 { margin: 0; font-size: 1.15rem; }
-  .amount {
-    font-family: Fraunces, Georgia, serif;
-    font-size: 2.4rem; margin: 0.4rem 0 0.25rem; font-weight: 600;
-  }
-  .amount span { font-size: 1rem; color: var(--muted); font-family: "IBM Plex Sans", sans-serif; font-weight: 500; }
-  .anchor { font-size: 0.9rem; color: var(--muted); margin: 0 0 1rem; }
-  .price ul { margin: 0 0 1.25rem; padding-left: 1.1rem; color: var(--muted); }
-  .price li { margin: 0.4rem 0; }
-  .price li strong { color: var(--ink); }
-  .example-inline {
-    background: var(--bg); border-radius: 12px; padding: 0.9rem 1rem;
-    font-size: 0.88rem; margin-bottom: 1.1rem; border: 1px dashed var(--line);
-  }
-  .example-inline .t { font-weight: 600; margin-bottom: 0.35rem; }
-  .example-inline .e { color: var(--accent); font-weight: 600; }
-
-  .route {
-    display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 1.25rem;
-    background: var(--card); border: 1px solid var(--line);
-    border-radius: var(--radius); padding: 1.5rem;
-  }
-  @media (max-width: 800px) { .route { grid-template-columns: 1fr; } }
-  .route ol { margin: 0.75rem 0 0; padding-left: 1.2rem; color: var(--muted); }
-  .route li { margin: 0.45rem 0; }
-  .route .side {
-    background: var(--accent-soft); border-radius: 12px; padding: 1rem 1.1rem;
-  }
-  .route .side h4 { margin: 0 0 0.4rem; font-size: 0.95rem; }
-  .route .side p { margin: 0 0 0.75rem; font-size: 0.9rem; color: var(--muted); }
-
-  .team {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
-  }
-  @media (max-width: 800px) { .team { grid-template-columns: 1fr; } }
-  .person { padding: 1.1rem; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); }
-  .avatar {
-    width: 3.2rem; height: 3.2rem; border-radius: 50%;
-    background: linear-gradient(135deg, #c5ddd4, #e8dcc8);
-    margin-bottom: 0.75rem;
-  }
-  .person h3 { margin: 0 0 0.15rem; font-size: 1rem; }
-  .person .role { color: var(--accent); font-size: 0.85rem; font-weight: 600; margin-bottom: 0.4rem; }
-  .person p { margin: 0; color: var(--muted); font-size: 0.9rem; }
-
-  .faq details {
-    background: var(--card); border: 1px solid var(--line);
-    border-radius: 12px; padding: 0.9rem 1.1rem; margin-bottom: 0.6rem;
-  }
-  .faq summary { font-weight: 600; cursor: pointer; }
-  .faq p { color: var(--muted); margin: 0.6rem 0 0; }
-
-  footer {
-    border-top: 1px solid var(--line); padding: 2rem 0 3rem;
-    color: var(--muted); font-size: 0.9rem;
-  }
-  footer .row { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
-  .disclaimer {
-    margin-top: 1.5rem; padding: 0.9rem 1rem; background: var(--card);
-    border-radius: 12px; border: 1px solid var(--line); font-size: 0.9rem;
-  }
-
-  .diff {
-    margin: 1.5rem 0 0; padding: 1rem 1.15rem;
-    background: #eef3ff; border: 1px solid #c9d6f5; border-radius: 12px;
-    font-size: 0.9rem;
-  }
-  .diff h3 { margin: 0 0 0.5rem; font-size: 0.95rem; color: #24386b; }
-  .diff ul { margin: 0; padding-left: 1.1rem; color: #3a4a6d; }
-</style>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="banner">Designpreview · niet live · <strong>herbouw volgens analyse</strong> · niets publiceren</div>
-
+  <div class="site-banner">Preview · <em>niet zominmogelijk.nl</em> · herbouw met funnel-fixes</div>
   <div class="wrap">
     <header class="nav">
       <a class="logo" href="index.html">Zo Min <span>Mogelijk</span></a>
-      <nav>
-        <a class="hide-sm" href="over-ons.html">Over ons</a>
-        <a class="hide-sm" href="maatwerk.html">Maatwerk</a>
-        <a class="btn btn-soft" href="scan.html">Start de gratis scan</a>
-      </nav>
+      <div class="nav-links">
+        <a class="desktop-only" href="over-ons.html">Over ons</a>
+        <a class="desktop-only" href="maatwerk.html">Maatwerk</a>
+        <a class="btn btn-primary" href="scan.html">Start de gratis scan</a>
+      </div>
     </header>
 
-    <section class="hero" style="padding-top:0.5rem">
+    <section class="hero">
       <div>
-        <div class="eyebrow">Erfbelasting · liquiditeit · tarieven 2026</div>
+        <div class="eyebrow">Erfbelasting · liquiditeit · 2026</div>
         <h1>Weet wat je kinderen moeten betalen — en of dat geld er is.</h1>
-        <p class="lede">
-          De aanslag moet binnen <strong>acht maanden</strong> betaald zijn.
-          Zit je vermogen in stenen, dan is de vraag niet alleen hoeveel erfbelasting,
-          maar of er genoeg vrij geld is.
-        </p>
+        <p class="lede">De aanslag moet binnen <strong>acht maanden</strong> betaald zijn. Zit je vermogen in stenen, dan is de vraag niet alleen hoeveel erfbelasting, maar of er genoeg vrij geld is.</p>
         <div class="cta-row">
           <a class="btn btn-primary" href="scan.html">Start de gratis scan</a>
-          <a class="btn btn-ghost" href="#prijzen">Bekijk scan vs rapport</a>
+          <a class="btn btn-secondary" href="#prijzen">Scan vs rapport</a>
         </div>
-        <p class="meta"><strong>Gratis · ~10 minuten · geen account.</strong> Je krijgt een indicatie en liquiditeitscheck — nog geen stappenplan.</p>
+        <p class="meta"><strong>Gratis · ~10 minuten · geen account.</strong> Indicatie en liquiditeitscheck — nog geen stappenplan.</p>
       </div>
-
-      <aside class="card calc" aria-label="Voorbeeld berekening">
-        <div class="calc-label">Voorbeeld · aanslag erfbelasting 2026</div>
+      <aside class="calc" aria-label="Voorbeeldberekening">
+        <div class="calc-kicker">Voorbeeld · erfbelasting 2026</div>
         <div class="calc-row"><span class="k">Te betalen (binnen 8 maanden)</span><span class="v">€&nbsp;68.774</span></div>
         <div class="calc-row"><span class="k">Op de rekening</span><span class="v">€&nbsp;35.000</span></div>
-        <div class="calc-row tekort"><span class="k">Tekort zonder te verkopen</span><span class="v">€&nbsp;33.774</span></div>
-        <p class="calc-note">Afbetaald huis €&nbsp;520.000 · spaargeld €&nbsp;35.000 · 2 kinderen · geen partner. Doorgerekend met tarieven 2026.</p>
+        <div class="calc-row shortfall"><span class="k">Tekort zonder te verkopen</span><span class="v">€&nbsp;33.774</span></div>
+        <p class="calc-foot">Huis €&nbsp;520.000 · spaargeld €&nbsp;35.000 · 2 kinderen · geen partner. Tarieven 2026.</p>
       </aside>
     </section>
 
-    <div class="diff">
-      <h3>Wat er anders is t.o.v. live (designkeuzes)</h3>
-      <ul>
-        <li>Hero belooft product + CTA naast de cijfers — niet alleen het tekort.</li>
-        <li>“In het rood” → urgentie in euro’s/termijn, met pad naar de scan.</li>
-        <li>Gratis vs €&nbsp;250 grens staat al in de first screen-meta.</li>
-      </ul>
-    </div>
-
-    <section id="hoe">
-      <h2>Hoe het werkt</h2>
-      <p class="section-intro">Drie stappen. Alleen stap 1–2 zijn gratis. Het stappenplan hoort bij het rapport.</p>
+    <section id="hoe" class="tight">
+      <div class="section-head">
+        <h2>Hoe het werkt</h2>
+        <p>Drie stappen. Alleen 1 en 2 zijn gratis. Het stappenplan hoort bij het rapport.</p>
+      </div>
       <div class="steps">
         <article class="step">
-          <div class="n">1</div>
+          <div class="step-num">1</div>
           <h3>Je doet de scan</h3>
           <p>Vragen over huis, spaargeld en gezin. Alleen wat bij jouw situatie hoort — hoogstens 39. “Weet ik niet” mag.</p>
-          <span class="tag">Gratis · €&nbsp;0</span>
+          <span class="pill">Gratis · €&nbsp;0</span>
         </article>
         <article class="step">
-          <div class="n">2</div>
+          <div class="step-num">2</div>
           <h3>Je ziet de uitkomst</h3>
-          <p>Indicatie erfbelasting, liquiditeitscheck, en de punten die opvallen — op volgorde van urgentie. Geen uitleg wat je moet doen.</p>
-          <span class="tag">Nog steeds gratis</span>
+          <p>Indicatie erfbelasting, liquiditeitscheck, urgente punten. Geen uitleg wat je moet doen.</p>
+          <span class="pill">Nog steeds gratis</span>
         </article>
-        <article class="step paid">
-          <div class="n">3</div>
+        <article class="step">
+          <div class="step-num">3</div>
           <h3>Optioneel: rapport of maatwerk</h3>
-          <p>Wil je weten wat je doet, wanneer en met wie? Dat zit in het rapport (€&nbsp;250). Te complex? Dan een fiscalist — zie maatwerk.</p>
-          <span class="tag">Vanaf hier betaald / maatwerk</span>
+          <p>Stappenplan met euro’s en termijnen: rapport €&nbsp;250. Te complex? Fiscalist via maatwerk.</p>
+          <span class="pill paid">Vanaf hier betaald</span>
         </article>
       </div>
     </section>
 
     <section id="prijzen">
-      <h2>Wat je gratis krijgt — en wat €&nbsp;250 oplevert</h2>
-      <p class="section-intro">Je krijgt een plan van aanpak, geen belastingadvies. Elk rapport wordt nagekeken door het team bij Fincredible.</p>
+      <div class="section-head">
+        <h2>Wat je gratis krijgt — en wat €&nbsp;250 oplevert</h2>
+        <p>Je krijgt een plan van aanpak, geen belastingadvies. Elk rapport wordt nagekeken door Fincredible.</p>
+      </div>
       <div class="pricing">
         <article class="price">
           <h3>De gratis scan</h3>
           <div class="amount">€&nbsp;0</div>
           <p class="anchor">Indicatie + liquiditeit. Geen stappen.</p>
           <ul>
-            <li>Indicatie van de erfbelasting die je kinderen betalen</li>
-            <li><strong>Liquiditeitscheck:</strong> kunnen ze dat betalen zonder iets te verkopen?</li>
-            <li>Punten die opvallen, op volgorde van urgentie</li>
-            <li><strong>Geen</strong> uitleg wat je hieraan kunt doen, en geen stappen</li>
+            <li>Indicatie erfbelasting voor je kinderen</li>
+            <li><strong>Liquiditeitscheck:</strong> betalen zonder te verkopen?</li>
+            <li>Punten op volgorde van urgentie</li>
+            <li><strong>Geen</strong> uitleg wat je moet doen, geen stappen</li>
           </ul>
-          <a class="btn btn-primary" href="scan.html" style="width:100%">Start de gratis scan</a>
+          <a class="btn btn-primary btn-block" href="scan.html">Start de gratis scan</a>
         </article>
         <article class="price featured">
           <span class="badge">Na de scan</span>
           <h3>Het rapport</h3>
-          <div class="amount">€&nbsp;250 <span>eenmalig</span></div>
-          <p class="anchor">Alles uit de scan, plus een nagekeken stappenplan om door te nemen met je kinderen of je notaris.</p>
-          <div class="example-inline">
-            <div class="t">Zo ziet een stap eruit (voorbeeld · bedragen verzonnen)</div>
-            <div>1. Testament laten aanpassen · binnen drie maanden · notaris</div>
-            <div class="e">Effect: €&nbsp;18.000 minder erfbelasting · kosten notaris ca. €&nbsp;600</div>
+          <div class="amount">€&nbsp;250 <small>eenmalig</small></div>
+          <p class="anchor">Nagekeken stappenplan om door te nemen met je kinderen of notaris.</p>
+          <div class="example">
+            <div class="label">Voorbeeldstap · bedragen verzonnen</div>
+            <div>Testament laten aanpassen · binnen drie maanden · notaris</div>
+            <div class="effect">Effect: €&nbsp;18.000 minder · notaris ca. €&nbsp;600</div>
           </div>
           <ul>
             <li>Genummerde stappen: wat, wanneer, met wie</li>
-            <li>Per stap: oplevering in euro’s + kosten in tijd/geld</li>
-            <li>Berekening in gewone taal + controleblad (wie/wanneer)</li>
+            <li>Per stap: oplevering in euro’s + kosten</li>
+            <li>Berekening in gewone taal + controleblad</li>
             <li>Versie voor kinderen of notaris</li>
           </ul>
-          <a class="btn btn-ghost" href="scan.html" style="width:100%">Eerst de scan — dan pas het rapport</a>
+          <a class="btn btn-secondary btn-block" href="scan.html">Eerst de scan</a>
         </article>
       </div>
     </section>
 
     <section>
-      <h2>Standaardroute</h2>
+      <div class="section-head">
+        <h2>Standaardroute</h2>
+        <p>Eerst scan. Daarna rapport of maatwerk.</p>
+      </div>
       <div class="route">
         <div>
-          <p style="margin:0;color:var(--muted)">Zo houd je de funnel helder:</p>
           <ol>
-            <li><strong>Start met de gratis scan</strong> — indicatie, liquiditeit, urgente punten.</li>
-            <li><strong>Koop het rapport (€&nbsp;250)</strong> als je een stappenplan wilt.</li>
-            <li><strong>Of maatwerk</strong> als je situatie te complex is voor een stappenplan — dan betaal je niets voor het rapport.</li>
+            <li><strong>Gratis scan</strong> — indicatie, liquiditeit, urgente punten.</li>
+            <li><strong>Rapport €&nbsp;250</strong> — als je een stappenplan wilt.</li>
+            <li><strong>Maatwerk</strong> — als het te complex is; dan betaal je niets voor het rapport.</li>
           </ol>
         </div>
-        <div class="side">
+        <div class="route-side">
           <h4>Uitzondering</h4>
-          <p>Onderneming, bezit in het buitenland of samengesteld gezin? Dan mag je direct een gesprek aanvragen.</p>
+          <p>Onderneming, buitenland of samengesteld gezin? Dan mag je direct een gesprek aanvragen.</p>
           <a class="btn btn-primary" href="maatwerk.html">Naar maatwerk</a>
         </div>
       </div>
     </section>
 
     <section>
-      <h2>Wie je rapport nakijkt</h2>
-      <p class="section-intro">Onderdeel van Fincredible. Geen automaat: een mens met je dossier.</p>
+      <div class="section-head">
+        <h2>Wie je rapport nakijkt</h2>
+        <p>Onderdeel van Fincredible. Geen automaat: een mens met je dossier.</p>
+      </div>
       <div class="team">
         <article class="person">
           <div class="avatar" aria-hidden="true"></div>
           <h3>Marieke de Wit</h3>
           <div class="role">Financial</div>
-          <p>Kijkt rapporten na, vooral op liquiditeit: is er genoeg vrij geld als het nodig is?</p>
+          <p>Kijkt rapporten na, vooral op liquiditeit.</p>
         </article>
         <article class="person">
           <div class="avatar" aria-hidden="true"></div>
           <h3>Joost Hermans</h3>
           <div class="role">Financial</div>
-          <p>Rekent scenario’s door en schrijft de toelichting, zodat je snapt waar de bedragen vandaan komen.</p>
+          <p>Rekent scenario’s door en schrijft de toelichting.</p>
         </article>
         <article class="person">
           <div class="avatar" aria-hidden="true"></div>
           <h3>Sanne Bakker</h3>
           <div class="role">Fiscalist</div>
-          <p>Neemt complexe situaties over in een persoonlijk gesprek.</p>
+          <p>Neemt complexe situaties over in een gesprek.</p>
         </article>
       </div>
-      <p style="margin-top:1rem"><a href="over-ons.html">Lees ons verhaal →</a></p>
+      <p style="margin-top:1.1rem"><a href="over-ons.html" style="color:var(--accent);font-weight:600;text-decoration:none">Lees ons verhaal →</a></p>
     </section>
 
     <section class="faq">
-      <h2>Veelgestelde vragen</h2>
+      <div class="section-head"><h2>Veelgestelde vragen</h2></div>
       <details open>
         <summary>Is dit belastingadvies?</summary>
-        <p>Nee. Je krijgt een plan van aanpak: wat je kunt doen, in welke volgorde, en met wie je daarvoor moet praten. Voor advies over jouw specifieke situatie schuift een fiscalist aan.</p>
+        <p>Nee. Je krijgt een plan van aanpak: wat je kunt doen, in welke volgorde, en met wie. Voor advies over jouw situatie schuift een fiscalist aan.</p>
       </details>
       <details>
         <summary>Gebruiken jullie AI?</summary>
-        <p>Deels, en we zeggen dat eerlijk. AI helpt met rekenen en het opstellen van je rapport. Daarna controleert ons team bij Fincredible elk rapport voordat je het ontvangt.</p>
+        <p>Deels. AI helpt met rekenen en opstellen. Daarna controleert het team bij Fincredible elk rapport.</p>
       </details>
       <details>
         <summary>Hoe lang duurt de scan?</summary>
-        <p>Ongeveer tien minuten. Hoogstens 39 vragen, maar je krijgt alleen die bij jouw situatie horen. Je kunt tussendoor stoppen.</p>
+        <p>Ongeveer tien minuten. Hoogstens 39 vragen; je krijgt alleen die bij jouw situatie horen.</p>
       </details>
       <details>
         <summary>Wie ziet mijn gegevens?</summary>
-        <p>Alleen het team dat je rapport nakijkt, en jijzelf. Gegevens op eigen servers in Nederland. Rapport via beveiligd portaal, niet als bijlage in de mail.</p>
+        <p>Alleen het team dat nakijkt, en jij. Servers in Nederland. Rapport via beveiligd portaal, niet als mailbijlage.</p>
       </details>
       <div class="disclaimer"><strong>Je krijgt een plan van aanpak, geen belastingadvies.</strong></div>
     </section>
 
     <footer>
-      <div class="row">
+      <div class="footer-row">
         <div>
-          <div class="logo">Zo Min <span style="color:var(--accent)">Mogelijk</span></div>
-          <p>Onderdeel van Fincredible</p>
+          <div class="logo">Zo Min <span>Mogelijk</span></div>
+          <p style="margin:.4rem 0 0">Onderdeel van Fincredible</p>
         </div>
         <div>
-          <a href="scan.html">Scan</a> ·
-          <a href="over-ons.html">Over ons</a> ·
+          <a href="scan.html">Scan</a>
+          <a href="over-ons.html">Over ons</a>
           <a href="maatwerk.html">Maatwerk</a>
         </div>
       </div>

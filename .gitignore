@@ -1,2 +1,7 @@
 .DS_Store
 *.log
+.DS_Store
+*.log
+*.v1-backup.html
+live-ref/
+compare/
