@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>De scan — Zo Min Mogelijk (design)</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root { --bg:#f7f4ef; --ink:#1a1f1c; --muted:#5c655e; --line:#d9d2c6; --card:#fff; --accent:#0f5c4c; --accent-soft:#e4f0ec; --radius:16px; }
+  *{box-sizing:border-box} body{margin:0;font-family:"IBM Plex Sans",system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55}
+  .banner{background:#2b2f2c;color:#f0ebe3;font-size:.85rem;text-align:center;padding:.55rem}
+  .wrap{width:min(720px,calc(100% - 2rem));margin:0 auto;padding:1.5rem 0 3rem}
+  a{color:var(--accent);text-decoration:none} .logo{font-family:Fraunces,Georgia,serif;font-weight:600;color:var(--ink)}
+  h1{font-family:Fraunces,Georgia,serif;font-size:clamp(1.6rem,3.5vw,2.1rem);line-height:1.2;margin:1.5rem 0 .75rem}
+  .lede{color:var(--muted);margin:0 0 1.25rem}
+  .outcome{background:var(--accent-soft);border-radius:12px;padding:1rem 1.1rem;margin-bottom:1.5rem;font-size:.95rem}
+  .outcome strong{color:var(--accent)}
+  .choices{display:grid;gap:1rem}
+  .choice{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.25rem;cursor:pointer;transition:.15s}
+  .choice:hover,.choice:focus{border-color:var(--accent);box-shadow:0 8px 24px rgba(15,92,76,.12)}
+  .choice h2{margin:0 0 .35rem;font-size:1.1rem}
+  .choice p{margin:0;color:var(--muted);font-size:.95rem}
+  .meta{margin-top:1.5rem;color:var(--muted);font-size:.9rem}
+  .note{margin-top:1rem;padding:.9rem 1rem;background:var(--card);border:1px solid var(--line);border-radius:12px;font-size:.9rem;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="banner">Designpreview · scan-start</div>
+<div class="wrap">
+  <a class="logo" href="index.html">← Zo Min Mogelijk</a>
+  <h1>Voor wie doe je de scan?</h1>
+  <p class="lede">Dat bepaalt welke vragen je krijgt. Je ziet alleen wat bij jouw situatie hoort.</p>
+
+  <div class="outcome">
+    <strong>Wat je gratis krijgt:</strong> een indicatie van de erfbelasting · liquiditeitscheck (kunnen ze betalen zonder te verkopen?) · urgente punten op volgorde.<br />
+    <strong>Wat je níet krijgt in de scan:</strong> stappen of uitleg wat je moet doen — dat zit in het rapport (€&nbsp;250).
+  </div>
+
+  <div class="choices">
+    <a class="choice" href="#demo">
+      <h2>Ik wil het zelf goed achterlaten</h2>
+      <p>Eigen huis en spaargeld · je vult je eigen cijfers in</p>
+    </a>
+    <a class="choice" href="#demo">
+      <h2>Het gaat om mijn ouders</h2>
+      <p>Je vult in wat je weet · “weet ik niet” mag overal</p>
+    </a>
+  </div>
+
+  <p class="meta">Hoogstens 39 vragen · ongeveer tien minuten · gratis</p>
+  <div class="note">
+    De uitkomst is een schatting op basis van de tarieven van 2026 en geen belastingadvies.
+    Je antwoorden blijven in deze browser tot je ze zelf bewaart.<br /><br />
+    <strong style="color:var(--ink)">Je krijgt een plan van aanpak, geen belastingadvies.</strong>
+  </div>
+</div>
+</body>
+</html>
